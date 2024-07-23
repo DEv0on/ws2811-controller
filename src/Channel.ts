@@ -1,11 +1,11 @@
 import ws281x from "rpi-ws281x-native";
-import {AbstractAnimation} from "./anim/Animation";
+import AbstractAnimation from "./anim/Animation";
 
 class Channel {
     mode: AbstractAnimation | null;
-    ledCount: number;
-    channel;
-    colorArray: Uint32Array;
+    readonly ledCount: number;
+    private channel;
+    private readonly colorArray: Uint32Array;
 
     constructor(ledCount: number) {
         this.mode = null;
