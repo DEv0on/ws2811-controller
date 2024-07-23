@@ -10,6 +10,10 @@ abstract class AbstractAnimation {
 
     abstract run(args: any[]): void;
     abstract tick(args: any[]): void;
+    setParam(key: string, value: any) {
+        //@ts-ignore
+        this[key] = value;
+    }
 }
 
 export default AbstractAnimation;

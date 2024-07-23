@@ -15,8 +15,7 @@ class WebServer {
             if (App.INSTANCE.getMode(req.params.anim) === undefined)
                 return res.json({ status: 405, error: "No such animation!"})
             Object.keys(req.body).forEach(key => {
-                //@ts-ignore
-                App.INSTANCE.getMode(req.params.anim)[key] = body[key]
+                App.INSTANCE.getMode(req.params.anim)!.setParam(key, req.body[key]);
             })
 
             res.json({ status: 200 })
