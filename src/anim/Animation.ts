@@ -10,8 +10,6 @@ abstract class AbstractAnimation {
 
     abstract run(args: any[]): void;
     abstract tick(args: any[]): void;
-
-    abstract setBrightness(brightness: number): void;
 }
 
 export default AbstractAnimation;

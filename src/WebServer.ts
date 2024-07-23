@@ -12,10 +12,11 @@ class WebServer {
 
     registerRoutes() {
         this.app.post('/:anim', (req, res) => {
-            const body = req.body;
-            Object.keys(body).forEach(key => {
+            if (App.INSTANCE.getMode(req.params.anim) === undefined)
+                return res.json({ status: 405, error: "No such animation!"})
+            Object.keys(req.body).forEach(key => {
                 //@ts-ignore
-                App.INSTANCE.getChannel().mode[key] = body[key]
+                App.INSTANCE.getMode(req.params.anim)[key] = body[key]
             })
 
             res.json({ status: 200 })

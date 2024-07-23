@@ -43,6 +43,10 @@ class App {
     getChannel(): Channel {
         return this.channel;
     }
+
+    getMode(mode: string) {
+        return this.modes.get(mode);
+    }
 }
 
 export default App;
