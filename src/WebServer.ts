@@ -27,6 +27,7 @@ class WebServer {
 
             const anim = App.INSTANCE.getMode(req.params.anim)!;
             App.INSTANCE.getChannel().mode = anim;
+            res.json({ status: 200 })
         })
     }
 
