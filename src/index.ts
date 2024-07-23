@@ -2,7 +2,7 @@ import {WebServer} from './WebServer';
 import {Channel} from "./Channel";
 import Static from "./anim/Static";
 import { readdirSync } from "node:fs";
-import {AbstractAnimation} from "./anim/Animation";
+import AbstractAnimation from "./anim/Animation";
 const PORT = 8080;
 const app = new WebServer(PORT);
 const channel = new Channel(144);
@@ -14,9 +14,9 @@ readdirSync("./anim/").forEach((file) => {
     const req = require(`./anim/${file}`);
     modes.set(file.split(".")[0].toLowerCase(), new req[Object.keys(req)[0]](channel));
 })
-console.log(modes)
-app.open();
+
 async function main() {
+    app.open();
     channel.setMode(modes.get("static")!);
     (channel.mode!as Static).color = 0xff0000;
     while (true) {

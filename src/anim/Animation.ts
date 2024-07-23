@@ -14,4 +14,4 @@ abstract class AbstractAnimation {
     abstract setBrightness(brightness: number): void;
 }
 
-export {AbstractAnimation}
+export default AbstractAnimation;

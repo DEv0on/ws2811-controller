@@ -1,4 +1,4 @@
-import {AbstractAnimation} from "./Animation";
+import AbstractAnimation from "./Animation";
 import {Channel} from "../Channel";
 
 class Static extends AbstractAnimation {
