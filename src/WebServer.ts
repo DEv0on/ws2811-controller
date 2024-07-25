@@ -14,7 +14,7 @@ class WebServer {
         this.app.post('/:anim', (req, res) => {
             if (App.INSTANCE.getMode(req.params.anim) === undefined)
                 return res.json({status: 405, error: "No such animation"})
-            Object.keys(req.body).forEach(key => {
+            for (const key of Object.keys(req.body)) {
                 if (key.toLowerCase().includes("brightness") && (typeof req.body[key] !== "number" || req.body[key] < 0 || req.body[key] > 255))
                     return res.json({status: 405, error: "Invalid brightness value"})
 
@@ -26,7 +26,7 @@ class WebServer {
                     return res.json({ status: 405, error: "Invalid color value"})
 
                 App.INSTANCE.getMode(req.params.anim)!.setParam(key, req.body[key]);
-            })
+            }
 
             res.json({status: 200})
         })
