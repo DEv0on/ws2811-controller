@@ -9,7 +9,7 @@ abstract class AbstractAnimation {
     }
 
     abstract run(args: any[]): void;
-    abstract tick(args: any[]): void;
+    abstract tick(args: any[]): Promise<void>;
     setParam(key: string, value: any) {
         //@ts-ignore
         this[key] = value;

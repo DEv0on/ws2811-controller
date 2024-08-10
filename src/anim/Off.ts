@@ -15,7 +15,7 @@ class Off extends AbstractAnimation {
         this.channel.setBrightness(brightness)
     }
 
-    tick(args: any[]) {
+    async tick(args: any[]) {
         this.setBrightness(0);
     }
 }

@@ -19,7 +19,7 @@ class Static extends AbstractAnimation {
         this.channel.setBrightness(brightness)
     }
 
-    tick(args: any[]) {
+    async tick(args: any[]) {
         this.brightness = Math.min(255, Math.max(0, this.brightness));
         this.setBrightness(this.brightness)
         for (let i = 0; i < this.channel.ledCount; i++) {
