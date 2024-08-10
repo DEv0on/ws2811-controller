@@ -8,7 +8,7 @@ class Rainbow extends AbstractAnimation {
 
     constructor(channel: Channel) {
         super(channel);
-        this.speed = 5;
+        this.speed = 2;
         this.brightness = 255;
         this.rainbow = [];
         this.genRainbow();
