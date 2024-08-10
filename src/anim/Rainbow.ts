@@ -33,7 +33,7 @@ class Rainbow extends AbstractAnimation {
     }
 
     async tick(args: any[]) {
-        this.rainbow = this.rainbow.concat(this.rainbow.slice(0, this.speed))
+        this.rainbow = this.rainbow.concat(this.rainbow.splice(0, this.speed))
         for (let i = 0; i < this.channel.ledCount; i++) {
             this.channel.colorArray[i] = this.rainbow[i]
         }
