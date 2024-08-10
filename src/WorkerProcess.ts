@@ -73,6 +73,7 @@ class WorkerProcess {
             if (this.channel.mode !== null) {
                 await this.channel.mode.tick([])
             }
+            await new Promise(res => setInterval(res, 0));
         }
     }
     

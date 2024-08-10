@@ -2,13 +2,13 @@ import AbstractAnimation from "./Animation";
 import {Channel} from "../Channel";
 
 class Rainbow extends AbstractAnimation {
-    delay: number
+    speed: number
     brightness: number
     rainbow: number[]
 
     constructor(channel: Channel) {
         super(channel);
-        this.delay = 5;
+        this.speed = 5;
         this.brightness = 255;
         this.rainbow = [];
         this.genRainbow();
@@ -33,13 +33,12 @@ class Rainbow extends AbstractAnimation {
     }
 
     async tick(args: any[]) {
-        this.rainbow.push(this.rainbow.shift()!)
+        this.rainbow = this.rainbow.concat(this.rainbow.slice(0, this.speed))
         for (let i = 0; i < this.channel.ledCount; i++) {
             this.channel.colorArray[i] = this.rainbow[i]
         }
         this.setBrightness(this.brightness);
         this.channel.render();
-        await new Promise(res => setInterval(res, this.delay))
     }
 }
 
