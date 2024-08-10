@@ -5,7 +5,7 @@ class Channel {
     mode: AbstractAnimation | null;
     readonly ledCount: number;
     private channel;
-    private readonly colorArray: Uint32Array;
+    readonly colorArray: Uint32Array;
 
     constructor(ledCount: number) {
         this.mode = null;
@@ -43,6 +43,10 @@ class Channel {
         }
 
         this.render();
+    }
+
+    setPixel(i: number, color: number) {
+        this.colorArray[i] = color;
     }
 
     render() {

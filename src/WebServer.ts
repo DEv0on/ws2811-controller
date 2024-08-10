@@ -1,5 +1,6 @@
 import express, {Express} from 'express';
 import App from "./App";
+import { Data } from './Worker';
 
 class WebServer {
     port: number;
@@ -12,30 +13,27 @@ class WebServer {
 
     registerRoutes() {
         this.app.post('/:anim', (req, res) => {
-            if (App.INSTANCE.getMode(req.params.anim) === undefined)
-                return res.json({status: 405, error: "No such animation"})
-            for (const key of Object.keys(req.body)) {
-                if (key.toLowerCase().includes("brightness") && (typeof req.body[key] !== "number" || req.body[key] < 0 || req.body[key] > 255))
-                    return res.json({status: 405, error: "Invalid brightness value"})
-
-                if (key.toLowerCase().includes("color") && typeof req.body[key] === "string") {
-                    const prefix = req.body[key].startsWith("0x") ? "" : "0x";
-                    req.body[key] = Number(prefix + req.body[key]);
+            const data: Data = {
+                type: "params",
+                content: {
+                    anim: req.params.anim,
+                    body: req.body
                 }
-                if (req.body[key] > 0xffffff || req.body[key] < 0)
-                    return res.json({ status: 405, error: "Invalid color value"})
-
-                App.INSTANCE.getMode(req.params.anim)!.setParam(key, req.body[key]);
             }
+
+            App.INSTANCE.worker.postMessage(data)
 
             res.json({status: 200})
         })
 
         this.app.post('/mode/:anim', (req, res) => {
-            if (App.INSTANCE.getMode(req.params.anim) === undefined)
-                return res.json({status: 405, error: "No such animation!"})
+            const data: Data = {
+                type: "mode",
+                content: req.params.anim
+            }
 
-            App.INSTANCE.getChannel().mode = App.INSTANCE.getMode(req.params.anim)!;
+            App.INSTANCE.worker.postMessage(data)
+
             res.json({status: 200})
         })
     }
